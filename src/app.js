@@ -11,16 +11,11 @@ import { runMedicalResearchAssistant } from "./services/research/assistant.js";
 
 const app = express();
 
-app.use(
-  cors({
-    origin: env.clientOrigin.split(",").map((value) => value.trim()),
-  })
-);
 app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ limit: "16kb", extended: true }));
 
 app.use("/api/chat", async(req, res)=> {
-  const {patientName, disease, intent, location, message} = req.body
+  const {patientName, disease, location, message} = req.body
   const response = await runMedicalResearchAssistant(patientName,disease,intent,location,message);
   res.json(
     new ApiResponse(200, response, "success True")
