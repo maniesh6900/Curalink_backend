@@ -13,6 +13,10 @@ const app = express();
 
 app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ limit: "16kb", extended: true }));
+app.use(cors({
+  origin : "*",
+}))
+
 
 app.use("/api/chat", async(req, res)=> {
   const {patientName, disease, location, message} = req.body
