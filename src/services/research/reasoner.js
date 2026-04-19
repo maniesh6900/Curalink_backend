@@ -8,8 +8,8 @@ const parseJson = (content) => {
     try {
       const match = content.match(/\{[\s\S]*\}/);
       if (match) return JSON.parse(match[0]);
-    } catch {}
-    
+    } catch { }
+
     const data = {
       overview: content.slice(0, 500),
       researchInsights: [],
@@ -77,7 +77,6 @@ export const generateEvidenceSynthesis = async ({ context, conversation, publica
         model: process.env.AI_MODEL,
         messages: [{ role: "user", content: prompt }],
         temperature: 0.2,
-        max_tokens: 2048,
       }),
     });
 
@@ -87,11 +86,11 @@ export const generateEvidenceSynthesis = async ({ context, conversation, publica
 
     const payload = await response.json();
     let content = payload.choices?.[0]?.message?.content;
-    
+
     if (!content && !payload.output?.text) {
       throw new ApiError(502, `AI returned unexpected format: ${JSON.stringify(payload).slice(0, 500)}`);
     }
-    
+
     content = content || payload.output?.text;
 
     if (!content) {
@@ -110,9 +109,9 @@ export const generateEvidenceSynthesis = async ({ context, conversation, publica
         safetyNotes: []
       };
     }
-    
+
     const summary = parsed.overview?.split(".")[0] + ".";
-    
+
     return {
       overview: summary,
       fullOverview: parsed.overview,
