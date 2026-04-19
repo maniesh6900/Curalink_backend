@@ -11,7 +11,7 @@ dotenv.config({
 
 export const env = {
   port: Number(process.env.PORT ?? 4000),
-  clientOrigin: "http://localhost:5173",
+  clientOrigin: process.env.CLIENT_ORIGIN ?? "http://localhost:5173",
   aiUrl: process.env.AI_URL,
   aiBaseUrl: process.env.AI_BASE_URL,
   aiModel:   process.env.AI_MODEL,
