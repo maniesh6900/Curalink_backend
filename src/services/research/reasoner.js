@@ -77,6 +77,7 @@ export const generateEvidenceSynthesis = async ({ context, conversation, publica
         model: process.env.AI_MODEL,
         messages: [{ role: "user", content: prompt }],
         temperature: 0.2,
+        max_token: 2048,
       }),
     });
 
