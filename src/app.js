@@ -19,7 +19,7 @@ app.use(cors({
 
 
 app.use("/api/chat", async(req, res)=> {
-  const {patientName, disease, location, message} = req.body
+  const {patientName, disease, intent, location, message} = req.body
   const response = await runMedicalResearchAssistant(patientName,disease,intent,location,message);
   res.json(
     new ApiResponse(200, response, "success True")
